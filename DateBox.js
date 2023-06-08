@@ -58,5 +58,14 @@ class DateBox{
         this.div.appendChild(this.detail);
 
         this.container.appendChild(this.div);//날짜 사각형을 부착
+
+        let obj=this;
+        //박스에 클릭 이벤트 연결하기 
+        this.div.addEventListener("click", ()=>{
+            console.log(this.yy, this.mm, this.dd, "클릭햇어?");
+            //우측영역에 상세내용 출력하기 
+            getContent();
+        });
+
     }    
 }
