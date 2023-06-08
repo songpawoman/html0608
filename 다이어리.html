@@ -364,9 +364,26 @@
 
         //사용자가 달력의 날짜 박스를 선택하면, 해당 날짜에 대한 
         //다이어리 기록 정보를 우측 폼 영역에 반영하자 
-        function getContent(){
-            alert("상세 내용원해?");
+        //매개변수의 값으로 DateBox 인스턴스가 전달된다..
+        function getContent(obj){
+            //console.log(obj);
+
+            //console.log("연도는 ", obj.yy);
+            //console.log("월은 ", obj.mm);
+            //console.log("일은 ", obj.dd);
+            
+            //우리가 보유한 정보인 yy, mm, dd와 diaryArray 에 들어
+            //있는 json들을 비교하여, 같을 경우 우측 영역에 json에 
+            //들어있는 다이어리 정보를 출력!
+            for(let i=0;i<diaryArray.length;i++){
+                let json=diaryArray[i];
+
+                if(json.yy==obj.yy && json.mm==obj.mm && json.dd==obj.dd){
+                    console.log(json.dd,"일 등록된 아이콘은", json.src, "내용은", json.content);
+                }
+            }
         }
+
 
         function init(){
             sel_yy=document.getElementById("sel_yy");
