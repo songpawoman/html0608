@@ -224,6 +224,9 @@
             createDate(sel_mm.value);
 
             printNum();
+
+            removeData();//기존 화면 초기화
+            loadData();//정보 불러오기
         }
 
         function next(){
@@ -237,6 +240,9 @@
             createDate(sel_mm.value);
 
             printNum();
+            removeData();//기존 화면 초기화
+            loadData();//정보 불러오기
+
         }
 
         //일요일~~ 토요일까지 7개의 박스 생성
@@ -289,6 +295,17 @@
             }
         }
 
+        //다이어리를 출력하기 전에, 기존의 자료들은 모두 제거..
+        function removeData(){
+            //현재 보고있는 달력을 대상으로...
+            for(let a=0;a<dateBoxArray.length;a++){
+                for(let i=0;i < dateBoxArray[a].length;i++){
+                    dateBoxArray[a][i].src=""; //정보
+                    dateBoxArray[a][i].icon.src="";//렌더링
+                }
+            }
+        }
+
         /*다이어리 기록 불러오기*/
         function loadData(){
             //날짜수 만큼 반복하면서, 각 날짜와 다이어리가
@@ -304,7 +321,14 @@
                         if(nowDate.getFullYear()==diaryArray[k].yy 
                             && nowDate.getMonth()==diaryArray[k].mm 
                             && dateBoxArray[a][i].dd==diaryArray[k].dd){
+
                             console.log(diaryArray[k].dd, " 발견되었어");    
+
+                            //아이콘 등장 
+                            dateBoxArray[a][i].icon.src=diaryArray[k].src;
+
+                            //상세내용 등장 
+
                         }                            
                     }
                 }
@@ -325,6 +349,9 @@
                 "content" : detail1.value
             }
             diaryArray.push(json);
+
+            removeData(); //화면싹 지우고 
+            loadData();//정보 불러오기 
         }
 
         function init(){
