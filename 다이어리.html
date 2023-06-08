@@ -73,6 +73,7 @@
             margin-top: 5px;
         }    
     </style>
+    <script src="../js/lib.js"></script>
     <script src="./DayBox.js"></script>
     <script src="./DateBox.js"></script>
     <script>
@@ -187,7 +188,7 @@
             let mm=nowDate.getMonth();//월 0부터~~
 
             //월을 화면에 출력할때는 반드시 1 을 더하자
-            title.innerText=yy+"년 "+(mm+1)+"월";
+            title.innerText=yy+"년 "+numString(mm+1) +"월";
         }
 
         //해당 월이 무슨요일부터 시작하는지 반환해주는 함수
@@ -258,7 +259,7 @@
                 let arr=new Array(7);
                 for(let i=0;i<7;i++){ //호수
                     //container, width, height, x, y, num, src, text
-                    let box=new DateBox(content, 100, 100,i*100, a*100,nowDate.getFullYear(),nowDate.getMonth(), 0, "" , "무");                        
+                    let box=new DateBox(content, 100, 100,i*100, a*100,nowDate.getFullYear(),nowDate.getMonth(), 0, "" , "");                        
                     arr[i]=box;
                 }
                 dateBoxArray.push(arr);
@@ -300,8 +301,14 @@
             //현재 보고있는 달력을 대상으로...
             for(let a=0;a<dateBoxArray.length;a++){
                 for(let i=0;i < dateBoxArray[a].length;i++){
+                    
+                    //아이콘 관련
                     dateBoxArray[a][i].src=""; //정보
                     dateBoxArray[a][i].icon.src="";//렌더링
+
+                    //내용관련 
+                    dateBoxArray[a][i].text=""; 
+                    dateBoxArray[a][i].detail.innerText="";
                 }
             }
         }
@@ -327,7 +334,8 @@
                             //아이콘 등장 
                             dateBoxArray[a][i].icon.src=diaryArray[k].src;
 
-                            //상세내용 등장 
+                            //상세내용 등장
+                            dateBoxArray[a][i].detail.innerText=getStringOutOfRange(diaryArray[k].content, 6);
 
                         }                            
                     }

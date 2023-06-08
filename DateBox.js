@@ -47,6 +47,7 @@ class DateBox{
         this.detail.style.left=10+"px";
         this.detail.style.top=70+"px";
         this.detail.innerText=this.text; //내용대입
+        this.detail.style.fontSize="9px";
 
         //박스 테두리 
         this.div.style.border="2px solid blue";
